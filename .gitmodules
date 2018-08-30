@@ -1,0 +1,3 @@
+[submodule "SDL_FontCache"]
+	path = SDL_FontCache
+	url = git@github.com:TamaHobbit/SDL_FontCache.git

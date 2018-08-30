@@ -584,6 +584,7 @@ void backgroundTasks(void) {
     // Refresh screen when in interactive mode
     if (Modes.interactive) {
         interactiveShowData();
+        sdlShowData();
     }
 
     if (Modes.stats > 0) {
@@ -831,6 +832,8 @@ int main(int argc, char **argv) {
     // Create the thread that will read the data from the device.
     pthread_create(&Modes.reader_thread, NULL, readerThreadEntryPoint, NULL);
     pthread_mutex_lock(&Modes.data_mutex);
+
+		if (Modes.interactive) initSdl();
 
     while (Modes.exit == 0) {
 

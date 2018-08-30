@@ -451,6 +451,12 @@ struct aircraft *interactiveFindAircraft(uint32_t addr);
 struct stDF     *interactiveFindDF      (uint32_t addr);
 
 //
+// Functions exported from sdl.c
+//
+void initSdl(void);
+void sdlShowData(void);
+
+//
 // Functions exported from net_io.c
 //
 void modesInitNet         (void);
