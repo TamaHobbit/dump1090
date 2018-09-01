@@ -57,13 +57,13 @@
     #include <ctype.h>
     #include <sys/stat.h>
     #include <sys/ioctl.h>
-    #include "rtl-sdr.h"
-    #include "anet.h"
 #else
     #include "winstubs.h" //Put everything Windows specific in here
-    #include "rtl-sdr.h"
-    #include "anet.h"
 #endif
+
+#include "rtl-sdr.h"
+#include "anet.h"
+#include <stdbool.h>
 
 // ============================= #defines ===============================
 //
@@ -453,8 +453,8 @@ struct stDF     *interactiveFindDF      (uint32_t addr);
 //
 // Functions exported from sdl.c
 //
-void initSdl(void);
-void sdlShowData(void);
+bool initSdl(void);
+bool sdlShowData(void);
 
 //
 // Functions exported from net_io.c

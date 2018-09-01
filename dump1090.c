@@ -584,7 +584,13 @@ void backgroundTasks(void) {
     // Refresh screen when in interactive mode
     if (Modes.interactive) {
         interactiveShowData();
-        sdlShowData();
+        if( !sdlShowData() ){
+    			//pthread_mutex_lock(&Modes.data_mutex);
+        	//Modes.exit = 1;
+    			//pthread_mutex_unlock(&Modes.data_mutex);
+    			exit(0); // note this is probably wrong, but Modes.exit doesn't seem to work
+        	return;
+        }
     }
 
     if (Modes.stats > 0) {
@@ -821,6 +827,12 @@ int main(int argc, char **argv) {
     }
     if (Modes.net) modesInitNet();
 
+		if (Modes.interactive) {
+			if( !initSdl() ){
+				exit(1);
+			}
+		}
+
     // If the user specifies --net-only, just run in order to serve network
     // clients without reading data from the RTL device
     while (Modes.net_only) {
@@ -832,8 +844,6 @@ int main(int argc, char **argv) {
     // Create the thread that will read the data from the device.
     pthread_create(&Modes.reader_thread, NULL, readerThreadEntryPoint, NULL);
     pthread_mutex_lock(&Modes.data_mutex);
-
-		if (Modes.interactive) initSdl();
 
     while (Modes.exit == 0) {
 

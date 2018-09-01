@@ -5,14 +5,14 @@ extern "C" {
 
 	Renderer * screen;
 
-	void initSdl(){
+	bool initSdl(){
 		static Renderer r;
 		screen = &r;
-		r.Initialize();
+		return r.Initialize();
 	}
 
-	void sdlShowData(){
-		screen->UpdateAndReturnWhetherToContinue();
+	bool sdlShowData(){
+		return screen->UpdateAndReturnWhetherToContinue();
 	}
 
 }
